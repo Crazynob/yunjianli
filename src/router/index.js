@@ -3,7 +3,7 @@ import editor from '../views/editor.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/editor',
     name: 'editor',
     component: editor
   },
