@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import editor from '../views/editor.vue'
+// import about from '../views/About.vue'
 
 const routes = [
   {
@@ -9,7 +10,7 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
