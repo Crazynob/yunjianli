@@ -9,6 +9,8 @@ import * as ElIconModules from '@element-plus/icons'
 
 const app = createApp(App)
 
+
+
 for(let iconName in ElIconModules){
     app.component(transElIconName(iconName),ElIconModules[iconName])
 }
@@ -22,5 +24,18 @@ app
 .use(store)
 .use(router)
 .use(ElementPlus)
+
+
+app.component('buttoounter', {
+    data() {
+      return {
+        count: 0
+      }
+    },
+    template: `
+      <button @click="count++">
+        You clicked me {{ count }} times.
+      </button>`
+  })
 
 app.mount('#app')
