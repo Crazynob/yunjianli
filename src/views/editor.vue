@@ -1,7 +1,7 @@
 <template>
   <el-container>
-    <el-header style="color:#555" height="90px">
-      <el-affix>
+    <el-header style="color:#555;z-index:1;" height="90px">
+      <div style=" position: fixed;left:0;right: 0;min-width: 1362px;">
         <!-- 标题栏 -->
         <el-row
           style="height:30px;background-color:#667cff;padding:0 5px;color:white;"
@@ -10,7 +10,7 @@
           <el-col :span="3" style="text-align:left;">
             <el-image
               style="width: 100px; height: 30px"
-              src="https://static.jianliben.com/images/logo"
+              src=""
               alt="logo"
               fit="cover"
             ></el-image>
@@ -98,7 +98,7 @@
             </el-row>
           </el-col>
         </el-row>
-      </el-affix>
+      </div>
     </el-header>
 
     <!-- 弹出栏菜单 -->
@@ -117,7 +117,7 @@
     <el-container>
       <el-aside class="asidemenu-left" width="200px"></el-aside>
       <el-main>
-        <div
+        <!-- <div
           id
           style="
               width: 795px;
@@ -134,19 +134,24 @@
 
 
 
+        </div>-->
+
+        <div style="width:795px; height:1122px;margin: 10px auto 0 auto;" @click="conso" id="con">
+          <canva></canva>
         </div>
 
-        <el-affix  position="bottom" :offset="30">
-          <div class="page_scale">
-            <div @click="scaleT('-')" class="scale_reduce">-</div>
-            <div class="scale_value">{{sc}}%</div>
-            <div @click="scaleT('+')" class="scale_enlarge">+</div>
-          </div>
-        </el-affix>
+        <!-- <el-affix  position="bottom" :offset="30"> -->
+        <div class="page_scale">
+          <div @click="scaleT('-')" class="scale_reduce">-</div>
+          <div class="scale_value">{{sc}}%</div>
+          <div @click="scaleT('+')" class="scale_enlarge">+</div>
+        </div>
+        <!-- </el-affix> -->
       </el-main>
 
-      <el-affix :offset="90">
-        <el-aside class="asidemenu-right" width="70px">
+      <el-aside style="" width="200px">
+        <!-- <el-affix :offset="90"> -->
+        <div class="asidemenu-right">
           <el-row justify="center">
             <button @click="direction = 'rtl'">
               <el-icon :size="30">
@@ -184,8 +189,10 @@
               <span>常见问题</span>
             </button>
           </el-row>
-        </el-aside>
-      </el-affix>
+        </div>
+
+        <!-- </el-affix> -->
+      </el-aside>
     </el-container>
   </el-container>
 </template>
@@ -195,6 +202,7 @@
 //https://nicedit.com/
 import { defineComponent, onMounted } from "@vue/runtime-core";
 import { ref } from "vue";
+import canva from "../templet/canvas.vue";
 
 export default {
   setup() {
@@ -205,8 +213,8 @@ export default {
     let iconSize = 22;
     let isLogin = ref(true);
     onMounted(() => {
-      win = document.getElementById("iframe_body").contentWindow;
-      console.log("Component is mounted!");
+      // win = document.getElementById("iframe_body").contentWindow;
+      // console.log("Component is mounted!");
     });
 
     let handleClose = done => {
@@ -214,18 +222,36 @@ export default {
     };
 
     function scaleT(op) {
-      console.log(sc.value)
+      console.log(sc.value);
       if ((op == "-" && sc.value <= 50) || (op == "+" && sc.value >= 100)) {
         return;
       }
       var body_table = win.document.getElementById("body_table");
       op = op == "-" ? -1 : 1;
       sc.value = sc.value + 5 * op;
-      var sty = "transform: scale(" + sc.value/100 + ");";
+      var sty = "transform: scale(" + sc.value / 100 + ");";
       body_table.setAttribute("style", sty);
     }
 
-    return { scaleT, drawer, handleClose, direction, iconSize, isLogin ,sc};
+    function conso(e) {
+      console.log(e);
+      let con = document.getElementById("con");
+      console.log(con.innerHTML);
+    }
+
+    return {
+      scaleT,
+      drawer,
+      handleClose,
+      direction,
+      iconSize,
+      isLogin,
+      sc,
+      conso
+    };
+  },
+  components: {
+    canva
   }
 };
 </script>
@@ -236,41 +262,42 @@ export default {
   min-width: 1362px;
 }
 .el-main {
-  padding: 0 0 20px 0;
+  padding: 0 0 30px 0;
 }
 .el-header {
   padding: 0;
+  text-align: center;
+
+  
 }
 
-.page_scale_reen{
+.page_scale_reen {
   float: left;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-    border-radius: 10px;
-    border: 1px #bbb solid;
-    user-select: none;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px #bbb solid;
+  user-select: none;
 }
 .page_scale {
-  width: 88px;
+  width: 89px;
   background-color: blue;
   height: 20px;
   position: absolute;
   right: 100px;
   border-radius: 10px;
   background-color: #e2e4e7;
-  .scale_reduce{
-    
+  .scale_reduce {
     font-size: 24px;
     line-height: 12px;
     cursor: pointer;
     background: #eee;
     color: #888;
     margin: 1px 0 0 1px;
-    .page_scale_reen()
-  
+    .page_scale_reen();
   }
-  .scale_value{
+  .scale_value {
     float: left;
     width: 40px;
     border: 0;
@@ -281,7 +308,7 @@ export default {
     color: #888;
     user-select: none;
   }
-  .scale_enlarge{
+  .scale_enlarge {
     font-size: 14px;
     line-height: 16px;
     font-weight: bold;
@@ -289,7 +316,7 @@ export default {
     background: #eee;
     color: #888;
     margin: 1px 1px 0 0;
-    .page_scale_reen()
+    .page_scale_reen();
   }
 }
 
@@ -344,6 +371,11 @@ export default {
   box-shadow: 0 0 1px #ccc;
   background-color: #f2f4f7;
   height: 100%;
+  width: 70px;
+  // float: right;
+  position: fixed;
+  right: 0;
+
   .el-row {
     margin-top: 30px;
   }

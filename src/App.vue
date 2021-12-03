@@ -2,7 +2,7 @@
   <router-view />
 </template>
 
-<style lang="less">
+<style lang="less" >
 @import "./command/less/all.less";
 
 html,

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			@font-face {
+				font-family: "fzjt";
+				src: url("../assets/font/卡通简.ttf");
+			}
+
+			[contenteditable]:focus {
+				outline: none;
+			}
+		</style>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	</head>
+
+	<body>
+
+
+		<div id="app">
+
+
+			<div style="width:795px;height:1122px;overflow:hidden;">
+				<div style="display:flex;height:100%;background-color:#f3eeea;">
+					<!-- 左侧信息栏 -->
+					<div style="position:relative;width:30%;height:100%;background-color:#80a8cc;">
+
+						<div id="avater" style="width:100%;height:200px;display:flex;align-items:center;justify-content:center;">
+							<img style="width:120px;height:120px;" src="./images/touxiang.png" />
+						</div>
+
+						<!-- 上传头像遮罩层 -->
+						<div id="avaterMask" class="no_avater_add delete">
+							<div>
+								+
+							</div>
+						</div>
+
+						<!-- 个人信息 -->
+						<div>
+							<div class="editor_border" style="text-align:center;color:white;">
+								<span style="font-size:32px;font-weight:bold;padding:5px;">张丹丹</span>
+								<br />
+								<br />
+								<span style="font-size:22px;font-weight:bold;padding:5px;">应聘岗位：新媒体运营</span>
+								<br />
+								<br />
+								<br />
+
+								<div style="text-align:left;margin:10px 0 0 10px; display: flex;align-items: center;">
+									<!-- 	<img v-if="item.type == 'image'" style="width:26px;height:26px;" :src="'./images/'+item.prefix"alt /> -->
+									<div style="padding-right:5px;" v-if="item.type == 'text'">地址</div>
+									<span style="padding:5px;">安徽省阜阳市太和县</span>
+								</div>
+							</div>
+
+							<br />
+							<br />
+							<br />
+							<br />
+
+							<!-- 技能证书 -->
+							<div id="skillList" class="editor_border editable" style="width:80%;color:white;margin-left:10px;">
+								<div style="padding-bottom:5px;border-bottom:solid 5px white;">
+									<span style="font-size:22px;font-weight:bold;">技能证书</span>
+								</div>
+
+								<div style="margin-top:20px;">
+									<span :index="index" style="font-size:18px;">语言能力：</span>
+									<div v-if="need" onclick="delSelf(this)" class="delete_skill" @click="">×</div>
+									<p :index="index" style="text-indent:2rem;">通过大学英语六级</p>
+								</div>
+
+							</div>
+							<!-- 专业技能添加按钮 -->
+							<div id="add_skill_btn" class="skill_add_btn" style v-if="need" v-show="true">+添加专业技能</div>
+						</div>
+					</div>
+
+					<!-- 右侧模块栏 -->
+					<div id="moudles" style="width:70%;height:100%;">
+
+						<!-- 模块一 -->
+						<div class="editor_border MODULE" style="border:1px solid #80a8cc; width:90%;margin:30px auto 0 auto;padding:5px;">
+							<!-- 添加模块删除模块工具条 -->
+							<div class="delete add_module_tabbar" style="">
+								<div style="display:flex;justify-content: end;">
+									<div onclick="addModule(this)" style="color:#3cdc80;cursor:pointer;">+添加模块</div>
+									<div onclick="delModule(this)" style="margin-left:10px;color:#f60;cursor:pointer;">-删除模块</div>
+								</div>
+							</div>
+
+
+							<!-- 模块主题 -->
+							<div style="display: flex;align-items:center;padding-bottom:5px;border-bottom:solid 1px #80a8cc;">
+								<!-- <img v-if="item.type == 'image'" style="width:26px;height:26px;" :src="require('../assets/images/'+item.prefix)" alt /> -->
+								<div style="font-size:20px;">⚪</div>
+								<span style="font-size:28px;font-weight:bold;">sadkasjdj</span>
+							</div>
+
+							<!-- 模块内容条数列表 -->
+							<div id="rows">
+
+								<!-- 模块中的一条内容 -->
+								<div class="row" style="position: relative;">
+									<div style="display:flex;font-size:17px;font-weight:bold;margin:5px 0;">
+										<span style="flex-grow:1;line-height:35px;">2015.07~2015.08</span>
+										<span style="flex-grow:1;line-height:35px;margin:0 5px ;">OPPO校园俱乐部</span>
+										<span style="flex-grow:1;line-height:35px;">项目新媒体运营</span>
+										<!-- <span style="flex-grow:1;line-height:35px;">本科</span> -->
+									</div>
+
+									<div style="position: relative;">
+										
+										<div id="">
+										<div>在官方微博平台中，打造“OPPO校园俱乐部”的概念，为OPPO公司在全国范围内各大高集结粉丝，让学生由参与者变成创造者，变成OPPO的校园代言人；
+											根据OPPO客户诉求，基于产品特点，负责品牌传播策略，包括创意构想、文案撰写等； 挖掘分析网友使用习惯、情感及体验感受，结合产品特点撰写传播策划方案。</div>	
+										</div>
+										
+										
+										
+										<div onclick="delParent(this)" style="position: absolute;color:red;font-size: 13px;bottom:3px;right:3px;cursor:pointer;visibility:hidden;"
+										 title="隐藏描述">🚫</div>
+									</div>
+
+									<!-- 添加一条内容删除一条内容工具条 -->
+									<div class="delete" style="z-index: 1; position: absolute;width: 100%;">
+										<div style="z-index:1;font-size:13px;box-shadow:0 1px 2px #ccc;background-color: #f8f8f8;width: 100%;display:flex;">
+											<div onclick="howToWrite(this)" style="color: #1e9fff;cursor:pointer;">如何填写?</div>
+											<div style="display: flex;flex-grow:1;justify-content:end;">
+												<div onclick="addRow(this)" style="color:#3cdc80;cursor:pointer;">+新增一条</div>
+												<div onclick="delRow(this)" style="margin-left:10px;color:#f60;cursor:pointer;">-删除本条</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<link rel="stylesheet/less" type="text/css" href="./style/style.less" />
+		<script src="./js/less.min.js" type="text/javascript"></script>
+
+		<script>
+			$("#avaterMask").mouseleave(() => {
+				$("#avaterMask").attr("style", "visibility:hidden;");
+			}).click(() => {
+				uploadAvater()
+			})
+			$("#avater").mouseenter(() => {
+				$("#avaterMask").attr("style", "visibility:visible;");
+			})
+
+			var text = '<div  style="margin-top:20px;">' +
+				'<span :index="index" style="font-size:18px;">专业技能</span>' +
+				'<div v-if="need" class="delete_skill" onclick="delSelf(this)" >×</div>' +
+				'<p :index="index" style="text-indent:2rem;">技能描述</p>' +
+				'</div>';
+
+			$("#add_skill_btn").click(() => {
+				$("#skillList").append(text);
+			});
+
+			function uploadAvater() {
+				let input = document.createElement("input");
+				input.type = "file";
+				input.click();
+				let that = this;
+				input.onchange = () => {
+					let file = input.files[0];
+					let form = new FormData();
+					form.append("file", file);
+					let windowURL = window.URL || window.webkitURL;
+					that.imgPath = windowURL.createObjectURL(file);
+					that.isuUploadAvater = false;
+					console.log(imgPath);
+				};
+			}
+
+			function delSelf(that) {
+				$(that).parent().remove();
+			}
+			function delParent(that) {
+				$(that).parent().remove();
+			}
+			
+			function addModule(that){
+				
+			}
+			function delModule(that){
+				var th = getParentByClassName(that,"MODULE");
+				th.remove();
+			}
+			function addRow(that){
+				var html = '<div class="row" style="position: relative;">'+
+					'<div style="display:flex;font-size:17px;font-weight:bold;margin:5px 0;">'+
+						'<span style="flex-grow:1;line-height:35px;">2015.07~2015.08</span>'+
+						'<span style="flex-grow:1;line-height:35px;margin:0 5px ;">OPPO校园俱乐部</span>'+
+						'<span style="flex-grow:1;line-height:35px;">项目新媒体运营</span>'+
+					'</div>'+
+					'<div style="position: relative;">'+
+						'<p>在官方微博平台中，打造“OPPO校园俱乐部”的概念，为OPPO公司在全国范围内各大高集结粉丝，让学生由参与者变成创造者，变成OPPO的校园代言人；'+
+						'根据OPPO客户诉求，基于产品特点，负责品牌传播策略，包括创意构想、文案撰写等； 挖掘分析网友使用习惯、情感及体验感受，结合产品特点撰写传播策划方案。</p>'+
+						'<div onclick="delParent(this)" style="position: absolute;color:red;font-size: 13px;bottom:3px;right:3px;cursor:pointer;visibility:hidden;" title="隐藏描述">🚫</div>'+
+					'</div>'+
+					'<div  class="delete" style="z-index: 1; position: absolute;width: 100%;">'+
+						'<div style="z-index:1;font-size:13px;box-shadow:0 1px 2px #ccc;background-color: #f8f8f8;width: 100%;display:flex;">'+
+						'	<div onclick="howToWrite(this)" style="color: #1e9fff;cursor:pointer;">如何填写</div>'+
+							'<div style="display: flex;flex-grow:1;justify-content:end;">'+
+								'<div onclick="addRow(this)" style="color:#3cdc80;cursor:pointer;">+新增一条</div>'+
+								'<div onclick="delRow(this)" style="margin-left:10px;color:#f60;cursor:pointer;">-删除本条</div>'+
+							'</div></div></div></div>';
+				
+		
+				var classname="row";
+				var th = getParentByClassName(that,classname);
+				th.after(html);
+				
+			}
+			function delRow(that){
+				var classname="row";
+				var th = getParentByClassName(that,classname);
+				if(th.siblings().length == 0){
+					delModule(th);
+				}else{
+					th.remove();
+				}
+			}
+			
+			function getParentByClassName(curObject,classname){
+				var th = $(curObject);
+				while(true){
+					name = th.attr("class");
+					if(classname && name.indexOf(classname)!=-1){
+						break;
+					}
+					th = th.parent();
+				}
+				return th;
+			}
+		</script>
+
+		<script src="./js/medium-editor.js"></script>
+		<link rel="stylesheet" href="https://yabwe.github.io/medium-editor/bower_components/medium-editor/dist/css/themes/beagle.css"id="medium-editor-theme">
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css"
+		 media="screen" charset="utf-8">
+		<script>
+			var editors = document.querySelectorAll(".editor_border");
+			var editor = new MediumEditor(editors);
+		</script>
+	</body>
+</html>
