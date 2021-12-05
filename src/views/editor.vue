@@ -8,12 +8,7 @@
           justify="space-between"
         >
           <el-col :span="3" style="text-align:left;">
-            <el-image
-              style="width: 100px; height: 30px"
-              src=""
-              alt="logo"
-              fit="cover"
-            ></el-image>
+            <el-image style="width: 100px; height: 30px" src alt="logo" fit="cover"></el-image>
           </el-col>
           <el-col :span="3">
             <span style="line-height:30px;">未命名简历</span>
@@ -117,28 +112,18 @@
     <el-container>
       <el-aside class="asidemenu-left" width="200px"></el-aside>
       <el-main>
-        <!-- <div
-          id
-          style="
-              width: 795px;
-              height: 1122px;
-              margin: 10px auto 0 auto;
-            "
-        >
+        <div id style="width: 795px; height: 1122px;  margin: 10px auto 0 auto;  ">
           <iframe
             id="iframe_body"
             scrolling="no"
             style="width: 100%; height: 100%;border-width:0;"
-            src="http://localhost:8080/static/jianli.html"
+            src="http://localhost:8080/static/divjianli2.html"
           ></iframe>
-
-
-
-        </div>-->
-
-        <div style="width:795px; height:1122px;margin: 10px auto 0 auto;" @click="conso" id="con">
-          <canva></canva>
         </div>
+
+        <!-- <div style="width:795px; height:1122px;margin: 10px auto 0 auto;" @click="conso" id="con">
+          <canva></canva>
+        </div>-->
 
         <!-- <el-affix  position="bottom" :offset="30"> -->
         <div class="page_scale">
@@ -149,7 +134,7 @@
         <!-- </el-affix> -->
       </el-main>
 
-      <el-aside style="" width="200px">
+      <el-aside style width="200px">
         <!-- <el-affix :offset="90"> -->
         <div class="asidemenu-right">
           <el-row justify="center">
@@ -202,7 +187,7 @@
 //https://nicedit.com/
 import { defineComponent, onMounted } from "@vue/runtime-core";
 import { ref } from "vue";
-import canva from "../templet/canvas.vue";
+// import canva from "../templet/canvas.vue";
 
 export default {
   setup() {
@@ -213,20 +198,51 @@ export default {
     let iconSize = 22;
     let isLogin = ref(true);
     onMounted(() => {
-      // win = document.getElementById("iframe_body").contentWindow;
-      // console.log("Component is mounted!");
+      win = document.getElementById("iframe_body").contentWindow;
+      console.log("Component is mounted!");
+
+        let templateMethods = {
+          addModule(that) {
+            win.doAddModule(that)
+          },
+          delParent(that) {
+            win.doDelParent(that)
+          },
+          addRow(that) {
+            win.doAddRow(that)
+          },
+          delRow(that) {
+            win.doDelRow(that)
+          },
+          howToWrite(that){
+            console.log("drawer")
+            drawer.value = !drawer.value;
+            testMethod();
+            win.doHowToWrite(that)
+          }
+        };
+
+        Object.keys(templateMethods).forEach(function(key) {
+          console.log(key, templateMethods[key]);
+          win[key] = templateMethods[key];
+        });
+
+      win.onload = function() {};
     });
 
     let handleClose = done => {
       done();
     };
+    function testMethod(){
+      console.log("testMethod");
+    }
 
     function scaleT(op) {
       console.log(sc.value);
       if ((op == "-" && sc.value <= 50) || (op == "+" && sc.value >= 100)) {
         return;
       }
-      var body_table = win.document.getElementById("body_table");
+      var body_table = win.document.getElementById("app");
       op = op == "-" ? -1 : 1;
       sc.value = sc.value + 5 * op;
       var sty = "transform: scale(" + sc.value / 100 + ");";
@@ -247,11 +263,12 @@ export default {
       iconSize,
       isLogin,
       sc,
-      conso
+      conso,
+      win
     };
   },
   components: {
-    canva
+    // canva
   }
 };
 </script>
@@ -267,8 +284,6 @@ export default {
 .el-header {
   padding: 0;
   text-align: center;
-
-  
 }
 
 .page_scale_reen {

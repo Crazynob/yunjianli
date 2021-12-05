@@ -1,12 +1,17 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import editor from '../views/editor.vue'
-// import about from '../views/About.vue'
+import index from "../views/index.vue"
 
 const routes = [
   {
     path: '/editor',
     name: 'editor',
     component: editor
+  },
+  {
+    path: '/',
+    name: 'index',
+    component: index
   },
   {
     path: '/about',

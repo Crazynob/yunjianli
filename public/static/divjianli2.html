@@ -26,8 +26,6 @@
 
 
 		<div id="app">
-
-
 			<div style="width:795px;height:1122px;overflow:hidden;">
 				<div style="display:flex;height:100%;background-color:#f3eeea;">
 					<!-- 左侧信息栏 -->
@@ -119,7 +117,7 @@
 									</div>
 
 									<div style="position: relative;">
-										
+
 										<div id="">
 										<div>在官方微博平台中，打造“OPPO校园俱乐部”的概念，为OPPO公司在全国范围内各大高集结粉丝，让学生由参与者变成创造者，变成OPPO的校园代言人；
 											根据OPPO客户诉求，基于产品特点，负责品牌传播策略，包括创意构想、文案撰写等； 挖掘分析网友使用习惯、情感及体验感受，结合产品特点撰写传播策划方案。</div>	
@@ -127,7 +125,7 @@
 										
 										
 										
-										<div onclick="delParent(this)" style="position: absolute;color:red;font-size: 13px;bottom:3px;right:3px;cursor:pointer;visibility:hidden;"
+										<div class="delete" id="description" onclick="delParent(this)" style="position: absolute;color:red;font-size: 13px;bottom:3px;right:3px;cursor:pointer;"
 										 title="隐藏描述">🚫</div>
 									</div>
 
@@ -196,21 +194,21 @@
 				};
 			}
 
-			function delSelf(that) {
+			function doDelSelf(that) {
 				$(that).parent().remove();
 			}
-			function delParent(that) {
+			function doDelParent(that) {
 				$(that).parent().remove();
 			}
 			
-			function addModule(that){
-				
+			function doAddModule(that){
+				console.log("doAddModule",that);
 			}
-			function delModule(that){
+			function doDelModule(that){
 				var th = getParentByClassName(that,"MODULE");
 				th.remove();
 			}
-			function addRow(that){
+			function doAddRow(that){
 				var html = '<div class="row" style="position: relative;">'+
 					'<div style="display:flex;font-size:17px;font-weight:bold;margin:5px 0;">'+
 						'<span style="flex-grow:1;line-height:35px;">2015.07~2015.08</span>'+
@@ -229,6 +227,7 @@
 								'<div onclick="addRow(this)" style="color:#3cdc80;cursor:pointer;">+新增一条</div>'+
 								'<div onclick="delRow(this)" style="margin-left:10px;color:#f60;cursor:pointer;">-删除本条</div>'+
 							'</div></div></div></div>';
+						
 				
 		
 				var classname="row";
@@ -236,7 +235,7 @@
 				th.after(html);
 				
 			}
-			function delRow(that){
+			function doDelRow(that){
 				var classname="row";
 				var th = getParentByClassName(that,classname);
 				if(th.siblings().length == 0){
@@ -244,6 +243,9 @@
 				}else{
 					th.remove();
 				}
+			}
+			function doHowToWrite(that){
+				console.log("doHowToWrite");
 			}
 			
 			function getParentByClassName(curObject,classname){
