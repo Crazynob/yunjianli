@@ -63,7 +63,7 @@
       </div>
     </el-header>
 
-    <el-main>
+    <el-main style="padding:0;background-color:#f5f7fa;">
       <div>
         <div style="text-align:center;">
           <h2 style="font-size:36px;color:#323233;margin:0;line-height:80px;">精选简历模板</h2>
@@ -72,7 +72,7 @@
 
         <div>
 
-          <el-carousel :interval="4000" type="card" height="600px" style="width:400px;">
+          <el-carousel :interval="4000" type="card" height="561px" :autoplay="false" style="width:795px;margin:50px auto 0 auto;">
             <el-carousel-item v-for="item in 6" :key="item">
               <h3 class="medium">{{ item }}</h3>
             </el-carousel-item>
@@ -88,7 +88,13 @@
   </el-container>
 </template>
 <script>
-export default {};
+
+
+export default {
+
+
+
+};
 </script>
 <style lang="less" scoped>
 .el-header {
