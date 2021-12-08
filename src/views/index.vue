@@ -1,9 +1,9 @@
 <template>
   <el-container style="min-width:1356px;">
     <el-header height="400px">
-      <div style="display:flex;align-items:center;width:100%;">
+      <div style="display:flex;align-items:center;width:1200px;margin:0 auto;">
         <el-image
-          style="width: 140px;height: 60px;margin:0 auto;"
+          style="width: 140px;height: 60px;"
           src="https://static.jianliben.com/images/logo.png?v=20210225"
         ></el-image>
         <el-menu
@@ -27,7 +27,7 @@
         <el-image fit="fill" style="width:36px;height: 36px;border-radius:100%;margin:0 auto;"></el-image>
       </div>
 
-      <div style="display:flex;width:70%;height:340px;margin:0 auto;">
+      <div style="display:flex;width:1200px;height:340px;margin:0 auto;">
         <div style="width:60%;height:100%;color:white;">
           <div style="margin-top:100px;">
             <h1 style="font-size:40px;line-height:40px;">简历本，一个专门写简历的网站</h1>
@@ -74,14 +74,14 @@
 
         <div style="height:354px;display:flex;align-items:center;justify-content:center;">
           <!-- 左滑箭头 -->
-          <div style="width:100px;line-height:50px;">
+          <div style="width:65px;line-height:50px;">
             <el-icon @click="left" style="cursor:pointer;float:left;" color="#B7CBFE" size="40">
               <i-d-arrow-left />
             </el-icon>
           </div>
 
           <!-- 滚动区域 -->
-          <div style="height:354px;width:70%;overflow: hidden;">
+          <div style="height:354px;width:1090px;overflow: hidden;">
             <ul class="temp_list">
               <li v-for="i in 7" :key="i">
                 <el-image
@@ -95,7 +95,7 @@
           </div>
 
           <!-- 右滑箭头 -->
-          <div style="width:100px;line-height:50px;display:flex;justify-content:end;">
+          <div style="width:65px;line-height:50px;display:flex;justify-content:end;">
             <el-icon @click="right" style="right:0;cursor:pointer;" color="#B7CBFE" size="40">
               <i-d-arrow-right />
             </el-icon>
@@ -103,9 +103,7 @@
         </div>
         <!-- 更多按钮 -->
         <div style="text-align:center;padding:60px 0;">
-          <button
-            style="border:2px solid #667cff;width:180px;height:46px;border-radius:5px;color:#667cff;"
-          >更多简历模板</button>
+          <button class="more_btn" style="">更多简历模板</button>
         </div>
       </div>
 
@@ -118,20 +116,21 @@
 
         <div >
           <ul class="vocation_temp_list">
-            <li style="">1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
+            <li v-for="i in 5" :key="i">
+              <el-image style="width:100%;vertical-align:middle;border-radius: 5px 5px 0 0;" src="https://static.jianliben.com/images/jobcov_xuesheng.png"></el-image>
+              <div style="background:linear-gradient(302deg,#736cff 0,#74c5ff 100%);height:260px;">
+                <el-image fit="contain" src="https://static.jianliben.com/images/jobico_chengxuyuan.png" style="padding-top:20px;background:;height:80px;width:100%;vertical-align:middle;"></el-image>
+                <h3 style="font-size:24px;color:#fff;text-align:center;line-height:40px;">学生简历</h3>
+                <button>查看简历</button>
+              </div>
+            </li>
+         
           </ul>
         </div>
 
          <!-- 更多按钮 -->
         <div style="text-align:center;padding:60px 0;">
-          <button
-            style="border:2px solid #667cff;width:180px;height:46px;border-radius:5px;color:#667cff;"
-          >更多简历模板</button>
+          <button class="more_btn">更多简历模板</button>
         </div>
       </div>
 
@@ -307,6 +306,18 @@ export default {
     }
   }
 }
+.more_btn{
+  cursor:pointer;
+  background:0;
+  border:2px solid #667cff;
+  width:180px;
+  height:46px;
+  border-radius:5px;
+  color:#667cff;
+  &:hover{
+    opacity: .8;
+  }
+}
 
 .vocation_temp_list{
   list-style:none;
@@ -314,8 +325,10 @@ export default {
   padding: 0;
   width:70%;
   margin:0 auto;
+  justify-content: center;
   li{
     // float: left;
+    flex-shrink: 0;
     width: 230px;
     height: 450px;
     background-color: red;
@@ -323,6 +336,7 @@ export default {
     opacity:.8;
     transition:all .3s;
     box-shadow: 0 2px 3px rgb(0 0 0 / 10%);
+    text-align:center;
     &:hover{
       width: 280px;
        height: 490px;
@@ -331,7 +345,30 @@ export default {
        transition:all .3s;
        box-shadow: 0 3px 4px rgb(0 0 0 / 20%);
        opacity:1;
+       button{
+         background-color: white;
+         color: #736cff;
+       }
+
+    
+
     }
+  
   }
+
+  button{
+      cursor: pointer;
+      width: 160px;
+      height: 40px;
+      line-height: 38px;
+      border-radius: 5px;
+      border: 2px solid #fff;
+      background: 0;
+      font-size: 16px;
+      color: #fff;
+      &:hover{
+        opacity: .8;
+      }
+    }
 }
 </style>
